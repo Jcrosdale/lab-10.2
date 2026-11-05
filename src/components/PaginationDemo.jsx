@@ -1,14 +1,52 @@
 import React, { useState, useEffect } from 'react';
 import usePagination from '../hooks/usePagination';
 
+// Create a component that uses your usePagination hook.
+// Display the current page number, total pages, and the slice of items for the current page.
+// Include buttons for “Previous”, “Next”, and jumping to specific page numbers (if you wish to demonstrate setPage more thoroughly).
+// Disable Previous/Next buttons when canPrevPage or canNextPage is false.
+
 export default function PaginationDemo() {
-    <>
-    return(
-        <h1>Pagination Demo</h1>
+    const [itemsPerPage, setItemsPerPage] = useState(10);
 
-        <h2>Items per page: </h2>
+    // Simulate a list of items (e.g., an array of 100 numbers or strings).
+    const items = Array.from({ length: 123 }, (_, index) => `Item $index + 1}`)
 
+    const {
+        currentPage,
+        totalPages,
+        startIndex,
+        endIndex,
+        itemsOnCurrentPage,
+        setPage,
+        nextPage,
+        prevPage,
+        canNextPage,
+        canPrevPage,
+    } = usePagination({
+        totalItems: items.length,
+        itemsPerPage
+    });
+
+    const currentItems = items.slice(startIndex, endIndex + 1);
+
+    return (
+        <>
+
+            <h1>Pagination Demo</h1>
+
+            <label>Items per page:</label>
+            <select 
+            value={itemsPerPage}
+            onChange={(event) => {
+                setItemsPerPage(Number(event.target.value));
+                setPage(1);
+            }}
+            >
+
+
+            )
+
+        </>
     )
-    
-    </>
 }
