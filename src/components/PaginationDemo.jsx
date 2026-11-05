@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import usePagination from '../hooks/usePagination';
 
 // Create a component that uses your usePagination hook.
@@ -10,7 +10,7 @@ export default function PaginationDemo() {
     const [itemsPerPage, setItemsPerPage] = useState(10);
 
     // Simulate a list of items (e.g., an array of 100 numbers or strings).
-    const items = Array.from({ length: 123 }, (_, index) => `Item $index + 1}`)
+    const items = Array.from({ length: 123 }, (_, index) => `Item ${index + 1}`)
 
     const {
         currentPage,
@@ -46,8 +46,8 @@ export default function PaginationDemo() {
             >
                 <option value={5}>5</option>
                 <option value={10}>10</option>
-                <option value={15}>20</option>
-                <option value={20}>50</option>
+                <option value={20}>20</option>
+                <option value={50}>50</option>
             </select>
 
             <p>Total Items: {items.length}</p>
@@ -79,6 +79,25 @@ export default function PaginationDemo() {
                 </button>
             </div>
 
+            <p>
+                Showing items {items.length === 0 ? 0 : startIndex + 1}
+                {' - '}
+                {startIndex + itemsOnCurrentPage}
+                {' (Total on this page: '}
+                {itemsOnCurrentPage}
+            </p>
+
+            <div>
+                {Array.from({ length: totalPages }, (_, index) => (
+                    <button
+                    key={index}
+                    onClick={() => setPage(index + 1)}
+                    disabled={currentPage === index + 1}
+                    >
+                        {index + 1}
+                    </button>
+                ))}
+            </div>
         </>
     )
 }
