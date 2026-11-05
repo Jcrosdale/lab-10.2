@@ -7,12 +7,17 @@ import { useState } from 'react';
 
 export default function usePagination({ totalItems, itemsPerPage = 10, initialPage = 1 }) {
     // Objects
+    if (itemsPerPage < 1) {
+        throw new Error('Zero items in page');
+    }
 
     // totalPages: The total number of pages calculated based on totalItems and itemsPerPage.
     const totalPages = Math.max(1, Math.ceil(totalItems / itemsPerPage));
 
     // currentPage: The current active page number.
-    const [currentPage, setCurrentPage] = useState(initialPage);
+    const [currentPage, setCurrentPage] = useState(
+        Math.max(1, Math.min(initialPage, totalPages))
+    );
 
     // setPage(pageNumber): A function to jump to a specific page number.
     const setPage = (pageNumber) => {
@@ -27,7 +32,7 @@ export default function usePagination({ totalItems, itemsPerPage = 10, initialPa
     const endIndex = Math.min(startIndex + itemsPerPage - 1, totalItems - 1);
 
     // itemsOnCurrentPage: The actual number of items on the current page (useful for the last page).
-    const itemsOnCurrentPage = endIndex - startIndex + 1;
+    const itemsOnCurrentPage = Math.max(0, endIndex - startIndex + 1);
 
     // nextPage(): A function to go to the next page.
     const nextPage = () => setPage(currentPage + 1);
