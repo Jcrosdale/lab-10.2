@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-function PaginationDemo() {
-    
+export default function PaginationDemo() {
+
+    //return(
+
+    //)
 }
