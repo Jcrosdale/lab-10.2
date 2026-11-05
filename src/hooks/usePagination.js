@@ -16,17 +16,18 @@ export default function usePagination({ totalItems, itemsPerPage = 10, initialPa
 
     // setPage(pageNumber): A function to jump to a specific page number.
     const setPage = (pageNumber) => {
-
-    }
+        const current = Math.max(1, Math.min(pageNumber, totalPages));
+        setCurrentPage(current);
+    };
 
     // startIndex: The starting index of items for the current page (0-based).
-    const startIndex = () => ((currentPage - 1) * itemsPerPage)
+    const startIndex = (currentPage - 1) * itemsPerPage
 
     // endIndex: The ending index of items for the current page (0-based).
-    const endIndex = () => {}
+    const endIndex = Math.min(startIndex + itemsPerPage - 1, totalItems - 1);
 
     // itemsOnCurrentPage: The actual number of items on the current page (useful for the last page).
-    const itemsOnCurrentPage = () => {}
+    const itemsOnCurrentPage = endIndex - startIndex + 1;
 
     // nextPage(): A function to go to the next page.
     const nextPage = () => setPage(currentPage + 1);
@@ -35,10 +36,10 @@ export default function usePagination({ totalItems, itemsPerPage = 10, initialPa
     const prevPage = () => setPage(currentPage - 1);
 
     // canNextPage: Boolean indicating if there is a next page.
-    const canNextPage = () => currentPage < totalPages;
+    const canNextPage = currentPage < totalPages;
 
     // canPrevPage: Boolean indicating if there is a previous page.
-    const canPrevPage = () => currentPage > 1;
+    const canPrevPage = currentPage > 1;
 
     return {
         currentPage,
