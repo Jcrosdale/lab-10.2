@@ -1,6 +1,6 @@
 // Imports
 import { useState, useEffect } from 'react';
-import { useDebounce } from "../hooks/useDebounce"
+import useDebounce from "../hooks/useDebounce"
 
 export default function DebounceSearchDemo() {
     const [text, setText] = useState("")

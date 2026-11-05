@@ -1,8 +1,9 @@
-import { PaginationDemo } from '../src/components/PaginationDemo'
-import { DebounceSearchDemo } from '../src/components/DebounceSearchDemo'
+import PaginationDemo from '../src/components/PaginationDemo'
+import DebounceSearchDemo from '../src/components/DebounceSearchDemo'
 
 export default function App() {
 
+  return(
   // Render
   <> {/* Parent tag */}
     <PaginationDemo>
@@ -14,4 +15,5 @@ export default function App() {
     </DebounceSearchDemo>
 
   </>
+  )
 }
