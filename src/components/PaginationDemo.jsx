@@ -36,16 +36,48 @@ export default function PaginationDemo() {
             <h1>Pagination Demo</h1>
 
             <label>Items per page:</label>
-            <select 
+            <select
+            id='itemsPerPage' 
             value={itemsPerPage}
             onChange={(event) => {
                 setItemsPerPage(Number(event.target.value));
                 setPage(1);
             }}
             >
+                <option value={5}>5</option>
+                <option value={10}>10</option>
+                <option value={15}>20</option>
+                <option value={20}>50</option>
+            </select>
 
+            <p>Total Items: {items.length}</p>
 
-            )
+            <ul>
+                {currentItems.map((item, index) => (
+                    <li key={index}>{item}</li>
+                ))}
+            </ul>
+
+            <div>
+                <button onClick={prevPage} disabled={!canPrevPage}>
+                    Previous
+                </button>
+
+                Page
+                <input
+                type='number'
+                min='1'
+                max={totalPages}
+                value={currentPage}
+                onChange={(event) => setPage(Number(event.target.value))}
+                />
+
+                of {totalPages}
+
+                <button onClick={nextPage} disabled={!canNextPage}>
+                    Next
+                </button>
+            </div>
 
         </>
     )
